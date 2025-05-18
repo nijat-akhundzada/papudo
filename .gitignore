@@ -1,3 +1,4 @@
 env/
 db_design.drawio
 app/sandbox.py
+*.db
