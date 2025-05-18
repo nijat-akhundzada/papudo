@@ -7,7 +7,7 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 
-class App(BaseHTTPRequestHandler):
+class App():
     def do_GET(self):
         if self.path == "/":
             self.handle_home()
