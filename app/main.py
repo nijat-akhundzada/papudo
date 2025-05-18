@@ -2,17 +2,29 @@ import subprocess
 import sys
 import os
 import time
-from http.server import HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 
-class App():
-    pass
+class App(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/":
+            self.handle_home()
+        elif self.path == "/about":
+            self.handle_about()
+        else:
+            self.handle_404()
+
+    def do_POST(self):
+        if self.path == "/submit":
+            self.handle_submit()
+        else:
+            self.handle_404()
 
 
 def run_server():
-    server = HTTPServer(("localhost", 8000), MyHandler)
+    server = HTTPServer(("localhost", 8000), App)
     print("🌐 Server running at http://localhost:8000")
     server.serve_forever()
 
