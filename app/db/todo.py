@@ -20,3 +20,26 @@ def create(name: str, status: str, user_id: int):
     '''
     cursor.execute(query)
     connection.commit()
+
+def update(todo_id:int, user_id:int, status:str = None, name:str = None):
+
+    if name and status:
+        query = f'''
+            UPDATE Todo
+            SET name = {name},
+                status = {status}
+            WHERE id = {todo_id} AND user_id = {user_id}
+        '''
+    elif status:
+        query = f'''
+            UPDATE Todo
+            SET status = {status}
+            WHERE id = {todo_id} AND user_id = {user_id}
+        '''
+    else:
+        query = f'''
+            UPDATE Todo
+            SET name = {name}
+            WHERE id = {todo_id} AND user_id = {user_id}
+        '''
+    
