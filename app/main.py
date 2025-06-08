@@ -7,6 +7,9 @@ from http.server import HTTPServer
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
+from db import connection
+from db.user import create
+
 
 class App():
     def do_GET(self):
@@ -73,11 +76,11 @@ def start_watcher():
 
 # --- Main Entrypoint ---
 if __name__ == "__main__":
-    connection = sqlite3.connect('./db.db')
-    if os.environ.get("RELOADER") == "1":
-        run_server()
-    else:
-        # Launch a subprocess with the server in "RELOADER" mode
-        os.environ["RELOADER"] = "1"
-        start_watcher()
+    create('Nihat', 'nihat@example.com', 'NihatMaestro')
+    # if os.environ.get("RELOADER") == "1":
+    #     run_server()
+    # else:
+    #     # Launch a subprocess with the server in "RELOADER" mode
+    #     os.environ["RELOADER"] = "1"
+    #     start_watcher()
     connection.close()

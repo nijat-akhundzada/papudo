@@ -1,4 +1,4 @@
-from main import connection
+from db import connection
 
 cursor = connection.cursor()
 
@@ -16,10 +16,7 @@ CREATE TABLE IF NOT EXISTS Todo (
 def create(name, status, user_id):
     query = f'''
         INSET INTO Todo (name, status, user_id)
-        VALUES ({name}, {status}, {user_id})
+        VALUES ('{name}', '{status}', '{user_id}')
     '''
     cursor.execute(query)
     connection.commit()
-
-
-connection.close()

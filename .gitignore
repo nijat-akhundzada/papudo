@@ -2,3 +2,4 @@ env/
 db_design.drawio
 app/sandbox.py
 *.db
+__pycache__
