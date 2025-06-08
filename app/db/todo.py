@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Todo (
 ''')
 
 
-def create(name, status, user_id):
+def create(name: str, status: str, user_id: int):
     query = f'''
         INSET INTO Todo (name, status, user_id)
         VALUES ('{name}', '{status}', '{user_id}')
