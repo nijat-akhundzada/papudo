@@ -1,6 +1,5 @@
-import sqlite3
+from main import connection
 
-connection = sqlite3.connect('../db.db')
 cursor = connection.cursor()
 
 cursor.execute('''
@@ -12,3 +11,15 @@ CREATE TABLE IF NOT EXISTS Todo (
     FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 )
 ''')
+
+
+def create(name, status, user_id):
+    query = f'''
+        INSET INTO Todo (name, status, user_id)
+        VALUES ({name}, {status}, {user_id})
+    '''
+    cursor.execute(query)
+    connection.commit()
+
+
+connection.close()

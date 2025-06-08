@@ -1,7 +1,7 @@
-import sqlite3
+from main import connection
 
-connection = sqlite3.connect('../db.db')
 cursor = connection.cursor()
+
 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS User (
@@ -11,3 +11,12 @@ CREATE TABLE IF NOT EXISTS User (
     password TEXT NOT NULL
 )
 ''')
+
+
+def create(fullname, email, password):
+    query = f'''
+        INSERT INTO User (fullname, email, password)
+        VALUES ('{fullname}', '{email}', '{password}')
+    '''
+    cursor.execute(query)
+    connection.commit()

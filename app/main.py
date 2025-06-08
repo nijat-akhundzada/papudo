@@ -1,3 +1,4 @@
+import sqlite3
 import subprocess
 import sys
 import os
@@ -72,9 +73,11 @@ def start_watcher():
 
 # --- Main Entrypoint ---
 if __name__ == "__main__":
+    connection = sqlite3.connect('./db.db')
     if os.environ.get("RELOADER") == "1":
         run_server()
     else:
         # Launch a subprocess with the server in "RELOADER" mode
         os.environ["RELOADER"] = "1"
         start_watcher()
+    connection.close()
