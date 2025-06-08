@@ -13,33 +13,35 @@ CREATE TABLE IF NOT EXISTS Todo (
 ''')
 
 
-def create(name: str, status: str, user_id: int):
+def create(name: str, user_id: int):
     query = f'''
-        INSET INTO Todo (name, status, user_id)
-        VALUES ('{name}', '{status}', '{user_id}')
+        INSERT INTO Todo (name, user_id)
+        VALUES ('{name}', '{user_id}')
     '''
     cursor.execute(query)
     connection.commit()
 
-def update(todo_id:int, user_id:int, status:str = None, name:str = None):
+
+def update(todo_id: int, user_id: int, status: str = None, name: str = None):
 
     if name and status:
         query = f'''
             UPDATE Todo
-            SET name = {name},
-                status = {status}
+            SET name = '{name}',
+                status = '{status}'
             WHERE id = {todo_id} AND user_id = {user_id}
         '''
     elif status:
         query = f'''
             UPDATE Todo
-            SET status = {status}
+            SET status = '{status}'
             WHERE id = {todo_id} AND user_id = {user_id}
         '''
     else:
         query = f'''
             UPDATE Todo
-            SET name = {name}
+            SET name = '{name}'
             WHERE id = {todo_id} AND user_id = {user_id}
         '''
-    
+    cursor.execute(query)
+    connection.commit()
