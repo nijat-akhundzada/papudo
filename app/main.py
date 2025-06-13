@@ -3,15 +3,24 @@ import subprocess
 import sys
 import os
 import time
-from http.server import HTTPServer
+from http.server import HTTPServer, BaseHTTPRequestHandler
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 from db import connection
+from user import views as user_view
 
 
-class App():
+class App(BaseHTTPRequestHandler):
+    def handle_404(self):
+        self.send_response(404)
+        self.end_headers()
+        self.wfile.write(b"Not Found")
+
     def do_GET(self):
         if self.path == "/":
+            print('OKKKKK')
+            self.handle_404()
+            return
             self.handle_home()
         elif self.path == "/about":
             self.handle_about()
@@ -19,8 +28,8 @@ class App():
             self.handle_404()
 
     def do_POST(self):
-        if self.path == "/submit":
-            self.handle_submit()
+        if self.path == "/create-user/":
+            user_view.create_user(self)
         else:
             self.handle_404()
 
