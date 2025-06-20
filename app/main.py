@@ -8,6 +8,7 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 from db import connection
 from user import views as user_view
+from todo import views as todo_view
 
 
 class App(BaseHTTPRequestHandler):
@@ -32,6 +33,8 @@ class App(BaseHTTPRequestHandler):
             user_view.create_user(self)
         elif self.path == '/update-user/':
             user_view.update_user(self)
+        elif self.path == '/create-todo/':
+            todo_view.create_todo(self)
         else:
             self.handle_404()
 
