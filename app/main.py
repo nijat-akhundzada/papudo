@@ -19,12 +19,7 @@ class App(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/":
-            print('OKKKKK')
-            self.handle_404()
-            return
-            self.handle_home()
-        elif self.path == "/about":
-            self.handle_about()
+            todo_view.get_todos(self)
         else:
             self.handle_404()
 

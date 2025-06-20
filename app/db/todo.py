@@ -15,11 +15,23 @@ CREATE TABLE IF NOT EXISTS Todo (
 
 def create(name: str, email: int):
     query = f'''
-        INSERT INTO Todo (name, email)
+        INSERT INTO Todo (name, user)
         VALUES ('{name}', '{email}')
     '''
     cursor.execute(query)
     connection.commit()
+
+
+def get_all(email: str):
+    query = f'''
+        SELECT * FROM Todo
+        WHERE user='{email}'
+    '''
+    cursor.execute(query)
+    data = [{'id': row[0], 'name': row[1], 'status': row[2]}
+            for row in cursor.fetchall()]
+
+    return data
 
 
 def update(todo_id: int, email: int, status: str = None, name: str = None):

@@ -6,7 +6,7 @@ cursor = connection.cursor()
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS User (
     fullname TEXT NOT NULL,
-    email PRIMARY KEY TEXT NOT NULL UNIQUE,
+    email TEXT PRIMARY KEY,
     password TEXT NOT NULL,
     is_active INTEGER DEFAULT TRUE NOT NULL
 )
