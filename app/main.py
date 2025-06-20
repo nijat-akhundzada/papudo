@@ -30,6 +30,8 @@ class App(BaseHTTPRequestHandler):
             user_view.update_user(self)
         elif self.path == '/create-todo/':
             todo_view.create_todo(self)
+        elif self.path == '/update-todo/':
+            todo_view.update_todo(self)
         else:
             self.handle_404()
 

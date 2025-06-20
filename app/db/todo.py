@@ -41,19 +41,19 @@ def update(todo_id: int, email: int, status: str = None, name: str = None):
             UPDATE Todo
             SET name = '{name}',
                 status = '{status}'
-            WHERE id = {todo_id} AND email = {email}
+            WHERE id = {todo_id} AND user = '{email}'
         '''
     elif status:
         query = f'''
             UPDATE Todo
             SET status = '{status}'
-            WHERE id = {todo_id} AND email = {email}
+            WHERE id = {todo_id} AND user = '{email}'
         '''
     else:
         query = f'''
             UPDATE Todo
             SET name = '{name}'
-            WHERE id = {todo_id} AND email = {email}
+            WHERE id = {todo_id} AND user = '{email}'
         '''
     cursor.execute(query)
     connection.commit()

@@ -51,7 +51,8 @@ def get_todos(request):
         error = {'error': e}
         request.wfile.write(json.dumps(error).encode())
 
-def update_todos(request):
+
+def update_todo(request):
     content_length = int(request.headers.get('Content-Length', 0))
     body = request.rfile.read(content_length)
     try:
@@ -72,4 +73,3 @@ def update_todos(request):
         e = str(e)
         error = {'error': e}
         request.wfile.write(json.dumps(error).encode())
-
