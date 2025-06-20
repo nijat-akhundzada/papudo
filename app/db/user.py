@@ -23,12 +23,12 @@ def create(fullname: str, email: str, password: str):
     connection.commit()
 
 
-def update(user_id, is_active):
+def update(user_email, is_active):
 
     query = f'''
         UPDATE User
         SET is_active = {is_active}
-        WHERE id = {user_id}
+        WHERE email = '{user_email}'
     '''
 
     cursor.execute(query)

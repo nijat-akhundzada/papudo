@@ -30,6 +30,8 @@ class App(BaseHTTPRequestHandler):
     def do_POST(self):
         if self.path == "/create-user/":
             user_view.create_user(self)
+        elif self.path == '/update-user/':
+            user_view.update_user(self)
         else:
             self.handle_404()
 
